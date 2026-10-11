@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="顽石与ALS抗争9年的经验分享，记录真实护理经验、辅助技术与生活探索。">
+<title>顽石经验分享｜顽石智护</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="top">
+  <a class="brand" href="../index.html">顽石智护</a>
+  <a class="back" href="../index.html">← 返回首页</a>
+</nav>
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">WANSHI · ALS EXPERIENCE</div>
+    <h1>顽石经验分享</h1>
+    <p>与ALS抗争9年。记录真实生活，分享踩过的坑和解决问题的办法。这里以后会陆续更新文章、图片和视频。</p>
+    <div class="byline">真实经历 · 实用经验 · 辅助技术</div>
+  </div>
+</header>
+<main class="main">
+  <div class="section-title">最新分享</div>
+  <div id="post-list">加载中...</div>
+  <p class="hint">图片、视频将在有真实素材后陆续添加；不显示空栏目。</p>
+</main>
+<footer class="footer">顽石经验分享 · 个人经历不代替医疗建议</footer>
+<script>
+fetch('posts/list.json')
+  .then(r => r.json())
+  .then(posts => {
+    const container = document.getElementById('post-list');
+    if (!posts.length) { container.innerHTML = '<p class="hint">暂无文章</p>'; return; }
+    container.innerHTML = posts.map(p => `
+      <a class="feature" href="post.html?slug=${p.slug}">
+        <div class="pill">文章 · ${p.date}</div>
+        <h2>${p.title}</h2>
+        <p>${p.excerpt || ''}</p>
+        <span class="go">阅读全文 →</span>
+      </a>
+    `).join('');
+  })
+  .catch(() => {
+    document.getElementById('post-list').innerHTML = '<p class="hint">加载失败，请刷新重试</p>';
+  });
+</script>
+</body>
+</html>

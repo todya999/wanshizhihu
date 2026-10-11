@@ -1,0 +1,14 @@
+顽石智护正式网站文件
+
+本包已保留9款产品卡片、9个本地视频文件，新增“认识顽石”、文章、分享素材、封面。
+
+部署：请先备份原Netlify站点。将整个解压文件夹的内容上传到你原有站点的Deploys（不要新建站点）；上传目录的最外层必须直接能看到 index.html、about、story、assets。
+
+上线后检查：
+https://wanshizhihu.com/
+https://wanshizhihu.com/about/
+https://wanshizhihu.com/story/als-9-years/
+https://wanshizhihu.com/share/
+
+注意：当前包为完整部署交付文件，尚未直接发布到Netlify；文章为经整理的完整主题版本，不是用户编辑稿的逐字逐句校对版。
+媒体报道、医疗表述和设备安全性应由发布者核对。

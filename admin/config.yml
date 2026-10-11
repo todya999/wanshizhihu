@@ -1,0 +1,36 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "posts"
+    label: "经验分享文章"
+    folder: "experience/posts"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "yaml-frontmatter"
+    fields:
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "发布日期", name: "date", widget: "datetime" }
+      - { label: "摘要", name: "excerpt", widget: "text", required: false }
+      - { label: "正文", name: "body", widget: "markdown" }
+
+  - name: "postlist"
+    label: "文章列表（新增文章后需在此添加条目）"
+    files:
+      - name: "list"
+        label: "文章列表"
+        file: "experience/posts/list.json"
+        fields:
+          - label: "文章列表"
+            name: "posts"
+            widget: "list"
+            fields:
+              - { label: "链接标识(slug)", name: "slug", widget: "string" }
+              - { label: "标题", name: "title", widget: "string" }
+              - { label: "发布日期", name: "date", widget: "datetime" }
+              - { label: "摘要", name: "excerpt", widget: "text", required: false }
