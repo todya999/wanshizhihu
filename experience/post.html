@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>顽石经验分享｜顽石智护</title>
+<meta name="description" content="顽石与ALS抗争9年的真实经验分享">
+<meta property="og:title" content="顽石经验分享｜顽石智护">
+<meta property="og:description" content="顽石与ALS抗争9年的真实经验分享">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://wanshizhihu.com/assets/social/share-square.png">
 <link rel="stylesheet" href="style.css">
 <script src="marked.min.js"></script>
 </head>
@@ -47,6 +52,12 @@ fetch('posts/' + slug + '.md')
       if (meta.title) document.getElementById('post-title').textContent = meta.title;
       if (meta.date) document.getElementById('post-meta').textContent = '作者：顽石　｜　' + meta.date + '　｜　真实经历，不代替医疗建议';
       document.title = meta.title + '｜顽石经验分享';
+      // 动态更新分享标题
+      document.querySelector('meta[property="og:title"]').setAttribute('content', meta.title);
+      if (meta.excerpt) {
+        document.querySelector('meta[name="description"]').setAttribute('content', meta.excerpt);
+        document.querySelector('meta[property="og:description"]').setAttribute('content', meta.excerpt);
+      }
       body = parts.slice(2).join('---');
     }
     document.getElementById('post-body').innerHTML = marked.parse(body);
