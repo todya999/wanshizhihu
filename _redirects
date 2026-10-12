@@ -1,0 +1,3 @@
+/admin https://deft-medovik-c4bf31.netlify.app/admin/ 302
+/admin/ https://deft-medovik-c4bf31.netlify.app/admin/ 302
+/admin/* https://deft-medovik-c4bf31.netlify.app/admin/:splat 302
