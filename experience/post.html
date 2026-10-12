@@ -33,11 +33,49 @@
     </div>
     <article class="article" id="post-body">加载中...</article>
   </div>
+
+  <!-- 产品引流区 -->
+  <div class="cta-box">
+    <div class="cta-text">
+      <h3>顽石智护 · ALS辅助产品</h3>
+      <p>9款自研产品，解决口水管理、肌张力疼痛、危机呼救三大难题</p>
+    </div>
+    <a href="../index.html" class="cta-btn">查看全部产品 →</a>
+  </div>
+
+  <!-- 更多文章 -->
+  <div class="more-posts">
+    <h3 class="section-title">更多经验分享</h3>
+    <div id="more-post-list">加载中...</div>
+  </div>
+
+  <!-- 评论区 -->
+  <div class="comments-section">
+    <h3 class="section-title">留言交流</h3>
+    <p class="comment-hint">用 GitHub 账号登录即可留言，也可以加微信 L52425434 交流</p>
+    <script src="https://giscus.app/client.js"
+      data-repo="todya999/wanshizhihu"
+      data-repo-id="R_kgDONlukYg"
+      data-category="General"
+      data-category-id="DIC_kwDONlukYs4CjZ3I"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="light"
+      data-lang="zh-CN"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
 </main>
 <footer class="footer">顽石经验分享 · 个人经历不代替医疗建议　｜　交流微信：L52425434</footer>
 <script>
 const params = new URLSearchParams(location.search);
 const slug = params.get('slug') || 'als-9-years';
+
+// 加载文章
 fetch('posts/' + slug + '.md')
   .then(r => { if (!r.ok) throw new Error('not found'); return r.text(); })
   .then(md => {
@@ -52,7 +90,6 @@ fetch('posts/' + slug + '.md')
       if (meta.title) document.getElementById('post-title').textContent = meta.title;
       if (meta.date) document.getElementById('post-meta').textContent = '作者：顽石　｜　' + meta.date + '　｜　真实经历，不代替医疗建议';
       document.title = meta.title + '｜顽石经验分享';
-      // 动态更新分享标题
       document.querySelector('meta[property="og:title"]').setAttribute('content', meta.title);
       if (meta.excerpt) {
         document.querySelector('meta[name="description"]').setAttribute('content', meta.excerpt);
@@ -65,6 +102,28 @@ fetch('posts/' + slug + '.md')
   .catch(() => {
     document.getElementById('post-title').textContent = '文章不存在';
     document.getElementById('post-body').innerHTML = '<p>未找到该文章。<a href="index.html">返回列表</a></p>';
+  });
+
+// 加载更多文章（排除当前文章）
+fetch('posts/list.json')
+  .then(r => r.json())
+  .then(posts => {
+    const other = posts.filter(p => p.slug !== slug);
+    const container = document.getElementById('more-post-list');
+    if (other.length === 0) {
+      container.innerHTML = '<p class="hint">更多文章陆续更新中...</p>';
+      return;
+    }
+    container.innerHTML = other.map(p => `
+      <a class="feature small" href="post.html?slug=${p.slug}">
+        <div class="pill">${p.date}</div>
+        <h4>${p.title}</h4>
+        <p>${p.excerpt || ''}</p>
+      </a>
+    `).join('');
+  })
+  .catch(() => {
+    document.getElementById('more-post-list').innerHTML = '<p class="hint">加载失败</p>';
   });
 </script>
 </body>
