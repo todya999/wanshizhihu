@@ -34,10 +34,10 @@ fetch('posts/list.json')
     if (!posts.length) { container.innerHTML = '<p class="hint">暂无文章</p>'; return; }
     container.innerHTML = posts.map(p => `
       <a class="feature" href="post.html?slug=${p.slug}">
-        <div class="pill">文章 · ${p.date}</div>
+        <div class="pill">${p.type || '文章'} · ${p.date}</div>
         <h2>${p.title}</h2>
         <p>${p.excerpt || ''}</p>
-        <span class="go">阅读全文 →</span>
+        <span class="go">${p.type === '视频' ? '观看视频 →' : '阅读全文 →'}</span>
       </a>
     `).join('');
   })

@@ -68,6 +68,7 @@ fetch('posts/' + slug + '.md')
       });
       if (meta.title) document.getElementById('post-title').textContent = meta.title;
       if (meta.date) document.getElementById('post-meta').textContent = '作者：顽石　｜　' + meta.date + '　｜　真实经历，不代替医疗建议';
+      if (meta.type) document.querySelector('.eyebrow').textContent = meta.type;
       document.title = meta.title + '｜顽石经验分享';
       document.querySelector('meta[property="og:title"]').setAttribute('content', meta.title);
       if (meta.excerpt) {
