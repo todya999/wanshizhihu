@@ -12,3 +12,5 @@ https://wanshizhihu.com/share/
 
 注意：当前包为完整部署交付文件，尚未直接发布到Netlify；文章为经整理的完整主题版本，不是用户编辑稿的逐字逐句校对版。
 媒体报道、医疗表述和设备安全性应由发布者核对。
+
+视频文章固定发布流程：将用户提供的 MP4 复制到 assets/uploads；在 experience/posts 新建同名 slug 的 Markdown 文章，使用 video 标签引用该文件；在 experience/posts/list.json 顶部添加标题、日期、摘要和 type: 视频；仅提交本次新增的视频与文章文件，推送 main 分支，由 Cloudflare Pages 自动上线；最后核验文章页、list.json 条目和视频资源均可访问。
